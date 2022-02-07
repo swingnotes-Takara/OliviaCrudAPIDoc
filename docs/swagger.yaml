@@ -49,16 +49,8 @@ paths:
             X-Token:
               type: string
               description: API Token
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
         '403':
           description: Forbidden
-          schema:
-            $ref: '#/definitions/UserInfo'
-        '404':
-          description: Not Found
   /v1/master/haisogyousya:
     get:
       tags:
