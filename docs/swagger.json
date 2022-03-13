@@ -71,8 +71,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden"
+                    "401": {
+                        "description": "Unauthorized"
                     }
                 }
             }
@@ -1048,7 +1048,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/JyuchuControllerResult«JyuchuInfo»"
                         }
                     },
                     "201": {
@@ -1119,7 +1119,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/JyuchuControllerResult«List«JyuchuMeisaiInfo»»"
                         }
                     },
                     "201": {
@@ -1185,7 +1185,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/JyuchuControllerResult«JyuchuInfo»"
                         }
                     },
                     "201": {
@@ -1311,7 +1311,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/JyuchuControllerResult«JyuchuMeisaiInfo»"
                         }
                     },
                     "201": {
@@ -1391,6 +1391,57 @@
         }
     },
     "definitions": {
+        "JyuchuControllerResult«JyuchuInfo»": {
+            "type": "object",
+            "properties": {
+                "errCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "errMsg": {
+                    "type": "string"
+                },
+                "resultData": {
+                    "$ref": "#/definitions/JyuchuInfo"
+                }
+            },
+            "title": "JyuchuControllerResult«JyuchuInfo»"
+        },
+        "JyuchuControllerResult«JyuchuMeisaiInfo»": {
+            "type": "object",
+            "properties": {
+                "errCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "errMsg": {
+                    "type": "string"
+                },
+                "resultData": {
+                    "$ref": "#/definitions/JyuchuMeisaiInfo"
+                }
+            },
+            "title": "JyuchuControllerResult«JyuchuMeisaiInfo»"
+        },
+        "JyuchuControllerResult«List«JyuchuMeisaiInfo»»": {
+            "type": "object",
+            "properties": {
+                "errCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "errMsg": {
+                    "type": "string"
+                },
+                "resultData": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/JyuchuMeisaiInfo"
+                    }
+                }
+            },
+            "title": "JyuchuControllerResult«List«JyuchuMeisaiInfo»»"
+        },
         "JyuchuInfo": {
             "type": "object",
             "properties": {
@@ -1505,6 +1556,10 @@
                 "souryo": {
                     "type": "integer",
                     "format": "int32"
+                },
+                "syukkaKanryoBi": {
+                    "type": "string",
+                    "format": "date"
                 },
                 "syukkaYoteiBi": {
                     "type": "string"
