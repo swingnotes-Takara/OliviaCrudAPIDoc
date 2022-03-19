@@ -2040,6 +2040,20 @@
                 "meisaiBikou": {
                     "type": "string"
                 },
+                "meisaiKoushinNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "meisaiKoushinSyaID": {
+                    "type": "string"
+                },
+                "meisaiTourokuNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "meisaiTourokuSyaID": {
+                    "type": "string"
+                },
                 "memo1": {
                     "type": "string"
                 },
