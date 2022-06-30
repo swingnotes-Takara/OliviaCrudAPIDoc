@@ -202,6 +202,9 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             }
@@ -792,7 +795,14 @@
                     {
                         "name": "kataban",
                         "in": "query",
-                        "description": "[検索条件]型番別名(部分一致)",
+                        "description": "[検索条件]型番(部分一致)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "katabanMeisho",
+                        "in": "query",
+                        "description": "[検索条件]型番名称(部分一致)",
                         "required": false,
                         "type": "string"
                     },
@@ -1837,9 +1847,6 @@
         "VJyuchu": {
             "type": "object",
             "properties": {
-                "betsuMei": {
-                    "type": "string"
-                },
                 "bikou": {
                     "type": "string"
                 },
@@ -1936,6 +1943,9 @@
                     "type": "string"
                 },
                 "kataban": {
+                    "type": "string"
+                },
+                "katabanMeisho": {
                     "type": "string"
                 },
                 "kibouTouchakuBi": {
