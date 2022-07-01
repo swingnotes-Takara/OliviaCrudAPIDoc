@@ -19,6 +19,10 @@
             "description": "Jyuchu Controller"
         },
         {
+            "name": "kataban-controller",
+            "description": "Kataban Controller"
+        },
+        {
             "name": "login-controller",
             "description": "Login Controller"
         },
@@ -28,6 +32,131 @@
         }
     ],
     "paths": {
+        "/v1/kataban/categories": {
+            "get": {
+                "tags": [
+                    "kataban-controller"
+                ],
+                "summary": "カテゴリー情報取得",
+                "description": "カテゴリー情報を取得します。",
+                "operationId": "getAllClassesUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CategorySentakushiInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/kataban/choices": {
+            "get": {
+                "tags": [
+                    "kataban-controller"
+                ],
+                "summary": "型番選択肢情報取得",
+                "description": "型番選択肢情報を取得します。",
+                "operationId": "getChoicesUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "[検索条件]カテゴリーID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sentakushi_no",
+                        "in": "query",
+                        "description": "[検索条件]選択肢No",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "kataban_youso",
+                        "in": "query",
+                        "description": "[検索条件]選択値",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/v1/login": {
             "post": {
                 "tags": [
@@ -71,8 +200,11 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized"
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             }
@@ -183,202 +315,6 @@
                 "summary": "受注方法マスター情報取得",
                 "description": "受注方法マスター情報を取得します。",
                 "operationId": "getJyuchuHouhouMasterUsingGET",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "X-User",
-                        "in": "header",
-                        "description": "UserId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "X-Token",
-                        "in": "header",
-                        "description": "Access Token",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/MasterInfo"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/v1/master/katabanhinmei": {
-            "get": {
-                "tags": [
-                    "master-info-controller"
-                ],
-                "summary": "型番品名マスター情報取得",
-                "description": "型番品名マスター情報を取得します。",
-                "operationId": "getKatabanHinmeiMasterUsingGET",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "X-User",
-                        "in": "header",
-                        "description": "UserId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "X-Token",
-                        "in": "header",
-                        "description": "Access Token",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/MasterInfo"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/v1/master/katabaniro": {
-            "get": {
-                "tags": [
-                    "master-info-controller"
-                ],
-                "summary": "型番色マスター情報取得",
-                "description": "型番色マスター情報を取得します。",
-                "operationId": "getKatabanIroMasterUsingGET",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "X-User",
-                        "in": "header",
-                        "description": "UserId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "X-Token",
-                        "in": "header",
-                        "description": "Access Token",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/MasterInfo"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/v1/master/katabantsuya": {
-            "get": {
-                "tags": [
-                    "master-info-controller"
-                ],
-                "summary": "型番艶マスター情報取得",
-                "description": "型番艶マスター情報を取得します。",
-                "operationId": "getKatabanTsuyaMasterUsingGET",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "X-User",
-                        "in": "header",
-                        "description": "UserId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "X-Token",
-                        "in": "header",
-                        "description": "Access Token",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/MasterInfo"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                }
-            }
-        },
-        "/v1/master/katabanyoryo": {
-            "get": {
-                "tags": [
-                    "master-info-controller"
-                ],
-                "summary": "型番容量マスター情報取得",
-                "description": "型番容量マスター情報を取得します。",
-                "operationId": "getKatabanYoryoMasterUsingGET",
                 "produces": [
                     "application/json"
                 ],
@@ -857,23 +793,16 @@
                         "type": "string"
                     },
                     {
-                        "name": "kataban_hinmei",
-                        "in": "query",
-                        "description": "[検索条件]型番品名(部分一致)",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "kataban_iro",
-                        "in": "query",
-                        "description": "[検索条件]型番色(部分一致)",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
                         "name": "kataban",
                         "in": "query",
-                        "description": "[検索条件]型番別名(部分一致)",
+                        "description": "[検索条件]型番(部分一致)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "katabanMeisho",
+                        "in": "query",
+                        "description": "[検索条件]型番名称(部分一致)",
                         "required": false,
                         "type": "string"
                     },
@@ -895,7 +824,7 @@
                     {
                         "name": "haisou_houhou",
                         "in": "query",
-                        "description": "[検索条件]配送方法ID(引渡方法ID)",
+                        "description": "[検索条件]配送方法ID",
                         "required": false,
                         "type": "string"
                     },
@@ -935,9 +864,16 @@
                         "type": "string"
                     },
                     {
+                        "name": "kokyaku_kanrimemo",
+                        "in": "query",
+                        "description": "[検索条件]顧客管理メモ(部分一致)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "name": "sort_column",
                         "in": "query",
-                        "description": "[ソート条件]ソート項目 （Allowable value：statusMei, taioJyokyoMei, jyuchuKyotenID, kyotenMei, jyuchuNichiji, jyuchuNo, hikiwatashiHouhouMei, chumonSyaMeisho, chumonSyaKaisyamei, katabanHinMHyojiMei, katabanIroHyojiMei, shiharaiHouhouMei, nyukinBi, kibouTouchakuBi, kibouTouchakuJikan, syukkaYoteiBi, syukkaKanryoBi, jyuchuTantousyaMei）",
+                        "description": "[ソート条件]ソート項目 （Allowable value：statusMei, taioJyokyoMei, jyuchuKyotenID, kyotenMei, jyuchuNichiji, jyuchuNo, hikiwatashiHouhouMei, chumonSyaMeisho, chumonSyaKaisyamei, shiharaiHouhouMei, nyukinBi, kibouTouchakuBi, kibouTouchakuJikan, syukkaYoteiBi, syukkaKanryoBi, jyuchuTantousyaMei）",
                         "required": false,
                         "type": "string",
                         "default": "jyuchuNichiji",
@@ -950,8 +886,6 @@
                             "HIKIWATASHIHOUHOUMEI",
                             "CHUMONSYAMEISHO",
                             "CHUMONSYAKAISYAMEI",
-                            "KATABANHINMHYOJIMEI",
-                            "KATABANIROHYOJIMEI",
                             "SHIHARAIHOUHOUMEI",
                             "NYUKINBI",
                             "KIBOUTOUCHAKUBI",
@@ -1391,6 +1325,24 @@
         }
     },
     "definitions": {
+        "CategorySentakushiInfo": {
+            "type": "object",
+            "properties": {
+                "categoryID": {
+                    "type": "string"
+                },
+                "categoryName": {
+                    "type": "string"
+                },
+                "sentakushiInfo": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SentakushiInfo"
+                    }
+                }
+            },
+            "title": "CategorySentakushiInfo"
+        },
         "JyuchuControllerResult«JyuchuInfo»": {
             "type": "object",
             "properties": {
@@ -1525,6 +1477,9 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "kokyakuID": {
+                    "type": "string"
+                },
                 "koushinNichiji": {
                     "type": "string",
                     "format": "date-time"
@@ -1603,16 +1558,10 @@
                 "jyuchuNo": {
                     "type": "string"
                 },
-                "katabanHinMeiID": {
+                "kataban": {
                     "type": "string"
                 },
-                "katabanIroID": {
-                    "type": "string"
-                },
-                "katabanTsuyaID": {
-                    "type": "string"
-                },
-                "katabanYoryoID": {
+                "katabanMeisho": {
                     "type": "string"
                 },
                 "kingaku": {
@@ -1709,6 +1658,19 @@
                 }
             },
             "title": "PagingData«VJyuchu»"
+        },
+        "SentakushiInfo": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "no": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "SentakushiInfo"
         },
         "StatusMasterInfo": {
             "type": "object",
@@ -1808,6 +1770,9 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "kokyakuID": {
+                    "type": "string"
+                },
                 "koushinNichiji": {
                     "type": "string",
                     "example": "yyyy-MM-dd'T'HH:mm:ss"
@@ -1882,9 +1847,6 @@
         "VJyuchu": {
             "type": "object",
             "properties": {
-                "betsuMei": {
-                    "type": "string"
-                },
                 "bikou": {
                     "type": "string"
                 },
@@ -1983,28 +1945,7 @@
                 "kataban": {
                     "type": "string"
                 },
-                "katabanHinMHyojiMei": {
-                    "type": "string"
-                },
-                "katabanHinMeiID": {
-                    "type": "string"
-                },
-                "katabanIroHyojiMei": {
-                    "type": "string"
-                },
-                "katabanIroID": {
-                    "type": "string"
-                },
-                "katabanTsuyaHyojiMei": {
-                    "type": "string"
-                },
-                "katabanTsuyaID": {
-                    "type": "string"
-                },
-                "katabanYoryoHyojiMei": {
-                    "type": "string"
-                },
-                "katabanYoryoID": {
+                "katabanMeisho": {
                     "type": "string"
                 },
                 "kibouTouchakuBi": {
@@ -2022,6 +1963,15 @@
                     "format": "int32"
                 },
                 "kokyakuChumonBango": {
+                    "type": "string"
+                },
+                "kokyakuID": {
+                    "type": "string"
+                },
+                "kokyakuKanriMemo": {
+                    "type": "string"
+                },
+                "kokyakuZokusei": {
                     "type": "string"
                 },
                 "koushinNichiji": {
