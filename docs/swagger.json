@@ -157,6 +157,98 @@
                 }
             }
         },
+        "/v1/kataban/list": {
+            "get": {
+                "tags": [
+                    "kataban-controller"
+                ],
+                "summary": "型番情報取得",
+                "description": "型番情報を取得します。",
+                "operationId": "getKatabanDataUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "リクエストするページ番号",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "ページごとのレコード数",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "[検索条件]カテゴリーID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sentakushi_no",
+                        "in": "query",
+                        "description": "[検索条件]選択肢No",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "kataban_youso",
+                        "in": "query",
+                        "description": "[検索条件]選択値",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PagingData«KatabanInfo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/v1/login": {
             "post": {
                 "tags": [
@@ -1623,6 +1715,57 @@
             },
             "title": "JyuchuMeisaiInfo"
         },
+        "KatabanInfo": {
+            "type": "object",
+            "properties": {
+                "categoryID": {
+                    "type": "string"
+                },
+                "chosyokuNando": {
+                    "type": "string"
+                },
+                "hacchuMakerID": {
+                    "type": "string"
+                },
+                "kakaku": {
+                    "type": "string"
+                },
+                "kataban": {
+                    "type": "string"
+                },
+                "katabanMeisho": {
+                    "type": "string"
+                },
+                "kyuKataban": {
+                    "type": "string"
+                },
+                "memo1": {
+                    "type": "string"
+                },
+                "memo2": {
+                    "type": "string"
+                },
+                "nouhinsyoHyoujiMei": {
+                    "type": "string"
+                },
+                "nouki": {
+                    "type": "string"
+                },
+                "setFlg": {
+                    "type": "string"
+                },
+                "syukkaHouhouID": {
+                    "type": "string"
+                },
+                "syukkagoKanouFlg": {
+                    "type": "string"
+                },
+                "zaikoBasyo": {
+                    "type": "string"
+                }
+            },
+            "title": "KatabanInfo"
+        },
         "MasterInfo": {
             "type": "object",
             "properties": {
@@ -1634,6 +1777,30 @@
                 }
             },
             "title": "MasterInfo"
+        },
+        "PagingData«KatabanInfo»": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/KatabanInfo"
+                    }
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PagingData«KatabanInfo»"
         },
         "PagingData«VJyuchu»": {
             "type": "object",
