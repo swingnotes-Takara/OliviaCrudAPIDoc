@@ -23,6 +23,10 @@
             "description": "Kataban Controller"
         },
         {
+            "name": "kokyaku-controller",
+            "description": "Kokyaku Controller"
+        },
+        {
             "name": "login-controller",
             "description": "Login Controller"
         },
@@ -235,6 +239,117 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/PagingData«KatabanInfo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/kokyaku/list": {
+            "get": {
+                "tags": [
+                    "kokyaku-controller"
+                ],
+                "summary": "顧客情報取得",
+                "description": "顧客情報を取得します。",
+                "operationId": "getKokyakuDataUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "リクエストするページ番号",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "ページごとのレコード数",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "kokyaku_mei",
+                        "in": "query",
+                        "description": "[検索条件]名前",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "kana",
+                        "in": "query",
+                        "description": "[検索条件]名前(カナ)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "zipcode",
+                        "in": "query",
+                        "description": "[検索条件]郵便番号",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jyusyo",
+                        "in": "query",
+                        "description": "[検索条件]住所",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "telNo",
+                        "in": "query",
+                        "description": "[検索条件]TEL",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mail",
+                        "in": "query",
+                        "description": "[検索条件]メールアドレス",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "memo",
+                        "in": "query",
+                        "description": "[検索条件]メモ",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PagingData«KokyakuInfo»"
                         }
                     },
                     "401": {
@@ -1766,6 +1881,63 @@
             },
             "title": "KatabanInfo"
         },
+        "KokyakuInfo": {
+            "type": "object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "jyusyo": {
+                    "type": "string"
+                },
+                "kokyakuID": {
+                    "type": "string"
+                },
+                "kokyakuMei": {
+                    "type": "string"
+                },
+                "kokyakuMeiKana": {
+                    "type": "string"
+                },
+                "kounyuKaisu": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                },
+                "memo": {
+                    "type": "string"
+                },
+                "sonota": {
+                    "type": "string"
+                },
+                "telNo": {
+                    "type": "string"
+                },
+                "tourokuNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "tourokuSyaID": {
+                    "type": "string"
+                },
+                "zipCode": {
+                    "type": "string"
+                },
+                "zokusei": {
+                    "type": "string"
+                }
+            },
+            "title": "KokyakuInfo"
+        },
         "MasterInfo": {
             "type": "object",
             "properties": {
@@ -1801,6 +1973,30 @@
                 }
             },
             "title": "PagingData«KatabanInfo»"
+        },
+        "PagingData«KokyakuInfo»": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/KokyakuInfo"
+                    }
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PagingData«KokyakuInfo»"
         },
         "PagingData«VJyuchu»": {
             "type": "object",
