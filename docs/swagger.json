@@ -166,9 +166,9 @@
                 "tags": [
                     "kataban-controller"
                 ],
-                "summary": "型番情報取得",
-                "description": "型番情報を取得します。",
-                "operationId": "getKatabanDataUsingGET",
+                "summary": "型番一覧情報取得",
+                "description": "型番一覧情報を取得します。",
+                "operationId": "getKatabanDataListUsingGET",
                 "produces": [
                     "application/json"
                 ],
@@ -220,6 +220,13 @@
                         "collectionFormat": "multi"
                     },
                     {
+                        "name": "query_setitem",
+                        "in": "query",
+                        "description": "[検索条件]セット内容取得フラグ",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
                         "name": "X-User",
                         "in": "header",
                         "description": "UserId",
@@ -239,6 +246,115 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/PagingData«KatabanInfo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/kataban/{kataban}": {
+            "get": {
+                "tags": [
+                    "kataban-controller"
+                ],
+                "summary": "型番情報取得",
+                "description": "型番情報を登録します。",
+                "operationId": "getKatabanInfoUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "kataban",
+                        "in": "path",
+                        "description": "kataban",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/KatabanInfo"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/kataban/{kataban}/items": {
+            "get": {
+                "tags": [
+                    "kataban-controller"
+                ],
+                "summary": "型番情報取得",
+                "description": "型番情報を取得します。",
+                "operationId": "getSetItemListUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "kataban",
+                        "in": "path",
+                        "description": "型番",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SetItemInfo"
+                            }
                         }
                     },
                     "401": {
@@ -1304,7 +1420,7 @@
                         "description": "jyuchuData",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TJyuchu"
+                            "$ref": "#/definitions/JyuchuInfo"
                         }
                     },
                     {
@@ -1729,20 +1845,17 @@
                 "taioJyokyoID": {
                     "type": "string"
                 },
-                "tanka": {
-                    "type": "integer",
-                    "format": "int32"
-                },
                 "tesuryo": {
                     "type": "integer",
                     "format": "int32"
                 },
                 "tourokuNichiji": {
                     "type": "string",
-                    "format": "date-time"
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
                 },
                 "tourokuSyaID": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
                 }
             },
             "title": "JyuchuInfo"
@@ -1780,7 +1893,7 @@
                 },
                 "koushinNichiji": {
                     "type": "string",
-                    "format": "date-time"
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
                 },
                 "koushinSyaID": {
                     "type": "string"
@@ -1822,7 +1935,7 @@
                 },
                 "tourokuNichiji": {
                     "type": "string",
-                    "format": "date-time"
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
                 },
                 "tourokuSyaID": {
                     "type": "string"
@@ -1868,6 +1981,12 @@
                 },
                 "setFlg": {
                     "type": "string"
+                },
+                "setItemInfoList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SetItemInfo"
+                    }
                 },
                 "syukkaHouhouID": {
                     "type": "string"
@@ -2035,6 +2154,53 @@
             },
             "title": "SentakushiInfo"
         },
+        "SetItemInfo": {
+            "type": "object",
+            "properties": {
+                "chosyokuNando": {
+                    "type": "string"
+                },
+                "hacchuMakerID": {
+                    "type": "string"
+                },
+                "kakaku": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "kataban": {
+                    "type": "string"
+                },
+                "katabanMeisho": {
+                    "type": "string"
+                },
+                "memo1": {
+                    "type": "string"
+                },
+                "memo2": {
+                    "type": "string"
+                },
+                "nouhinsyoHyoujiMei": {
+                    "type": "string"
+                },
+                "nouki": {
+                    "type": "string"
+                },
+                "oyaKataban": {
+                    "type": "string"
+                },
+                "suryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "syukkaHouhouID": {
+                    "type": "string"
+                },
+                "zaikoBasyo": {
+                    "type": "string"
+                }
+            },
+            "title": "SetItemInfo"
+        },
         "StatusMasterInfo": {
             "type": "object",
             "properties": {
@@ -2049,142 +2215,6 @@
                 }
             },
             "title": "StatusMasterInfo"
-        },
-        "TJyuchu": {
-            "type": "object",
-            "properties": {
-                "bikou": {
-                    "type": "string"
-                },
-                "chumonSyaFax": {
-                    "type": "string"
-                },
-                "chumonSyaJyusyo": {
-                    "type": "string"
-                },
-                "chumonSyaKaisyamei": {
-                    "type": "string"
-                },
-                "chumonSyaKana": {
-                    "type": "string"
-                },
-                "chumonSyaMail": {
-                    "type": "string"
-                },
-                "chumonSyaMeisho": {
-                    "type": "string"
-                },
-                "chumonSyaTelNo": {
-                    "type": "string"
-                },
-                "chumonSyaZipCode": {
-                    "type": "string"
-                },
-                "haisouGyosyaID": {
-                    "type": "string"
-                },
-                "haisousakiChui": {
-                    "type": "string"
-                },
-                "haisousakiFax": {
-                    "type": "string"
-                },
-                "haisousakiJyusyo": {
-                    "type": "string"
-                },
-                "haisousakiKaisyamei": {
-                    "type": "string"
-                },
-                "haisousakiKana": {
-                    "type": "string"
-                },
-                "haisousakiMeisho": {
-                    "type": "string"
-                },
-                "haisousakiTelNo": {
-                    "type": "string"
-                },
-                "haisousakiZipCode": {
-                    "type": "string"
-                },
-                "jyuchuHouhouID": {
-                    "type": "string"
-                },
-                "jyuchuKyotenID": {
-                    "type": "string"
-                },
-                "jyuchuNichiji": {
-                    "type": "string",
-                    "example": "yyyy-MM-dd'T'HH:mm:ss"
-                },
-                "jyuchuNo": {
-                    "type": "string"
-                },
-                "jyuchuTantousyaID": {
-                    "type": "string"
-                },
-                "kibouTouchakuBi": {
-                    "type": "string"
-                },
-                "kibouTouchakuJikan": {
-                    "type": "string"
-                },
-                "koguchiSu": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "kokyakuID": {
-                    "type": "string"
-                },
-                "koushinNichiji": {
-                    "type": "string",
-                    "example": "yyyy-MM-dd'T'HH:mm:ss"
-                },
-                "koushinSyaID": {
-                    "type": "string"
-                },
-                "nouhinsyoBikou": {
-                    "type": "string"
-                },
-                "seikyuKingaku": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "shouhiZei": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "shoukei": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "souryo": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "syukkaKanryoBi": {
-                    "type": "string",
-                    "format": "date"
-                },
-                "syukkaYoteiBi": {
-                    "type": "string"
-                },
-                "taioJyokyoID": {
-                    "type": "string"
-                },
-                "tesuryo": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "tourokuNichiji": {
-                    "type": "string",
-                    "example": "yyyy-MM-dd'T'HH:mm:ss"
-                },
-                "tourokuSyaID": {
-                    "type": "string"
-                }
-            },
-            "title": "TJyuchu"
         },
         "UserInfo": {
             "type": "object",
