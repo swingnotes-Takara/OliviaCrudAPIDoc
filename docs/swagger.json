@@ -1332,7 +1332,7 @@
                         "description": "jyuchuData",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/JyuchuInfo"
+                            "$ref": "#/definitions/JyuchuForm"
                         }
                     },
                     {
@@ -1354,7 +1354,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/JyuchuControllerResult«JyuchuInfo»"
+                            "$ref": "#/definitions/JyuchuControllerResult«JyuchuForm»"
                         }
                     },
                     "201": {
@@ -1373,6 +1373,57 @@
             }
         },
         "/v1/order/{jyuchuNo}": {
+            "get": {
+                "tags": [
+                    "jyuchu-controller"
+                ],
+                "summary": "受注詳細情報取得",
+                "description": "受注詳細情報を登録します。",
+                "operationId": "getJyuchuDetailUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "jyuchuNo",
+                        "in": "path",
+                        "description": "jyuchuNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/JyuchuInfo"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "jyuchu-controller"
@@ -1425,7 +1476,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/JyuchuControllerResult«List«JyuchuMeisaiInfo»»"
+                            "$ref": "#/definitions/JyuchuControllerResult«List«JyuchuMeisaiForm»»"
                         }
                     },
                     "201": {
@@ -1469,7 +1520,7 @@
                         "description": "jyuchuData",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/JyuchuInfo"
+                            "$ref": "#/definitions/JyuchuForm"
                         }
                     },
                     {
@@ -1491,7 +1542,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/JyuchuControllerResult«JyuchuInfo»"
+                            "$ref": "#/definitions/JyuchuControllerResult«JyuchuForm»"
                         }
                     },
                     "201": {
@@ -1617,7 +1668,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/JyuchuControllerResult«JyuchuMeisaiInfo»"
+                            "$ref": "#/definitions/JyuchuControllerResult«JyuchuMeisaiForm»"
                         }
                     },
                     "201": {
@@ -1715,7 +1766,7 @@
             },
             "title": "CategorySentakushiInfo"
         },
-        "JyuchuControllerResult«JyuchuInfo»": {
+        "JyuchuControllerResult«JyuchuForm»": {
             "type": "object",
             "properties": {
                 "errCode": {
@@ -1726,12 +1777,12 @@
                     "type": "string"
                 },
                 "resultData": {
-                    "$ref": "#/definitions/JyuchuInfo"
+                    "$ref": "#/definitions/JyuchuForm"
                 }
             },
-            "title": "JyuchuControllerResult«JyuchuInfo»"
+            "title": "JyuchuControllerResult«JyuchuForm»"
         },
-        "JyuchuControllerResult«JyuchuMeisaiInfo»": {
+        "JyuchuControllerResult«JyuchuMeisaiForm»": {
             "type": "object",
             "properties": {
                 "errCode": {
@@ -1742,12 +1793,12 @@
                     "type": "string"
                 },
                 "resultData": {
-                    "$ref": "#/definitions/JyuchuMeisaiInfo"
+                    "$ref": "#/definitions/JyuchuMeisaiForm"
                 }
             },
-            "title": "JyuchuControllerResult«JyuchuMeisaiInfo»"
+            "title": "JyuchuControllerResult«JyuchuMeisaiForm»"
         },
-        "JyuchuControllerResult«List«JyuchuMeisaiInfo»»": {
+        "JyuchuControllerResult«List«JyuchuMeisaiForm»»": {
             "type": "object",
             "properties": {
                 "errCode": {
@@ -1760,13 +1811,13 @@
                 "resultData": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/JyuchuMeisaiInfo"
+                        "$ref": "#/definitions/JyuchuMeisaiForm"
                     }
                 }
             },
-            "title": "JyuchuControllerResult«List«JyuchuMeisaiInfo»»"
+            "title": "JyuchuControllerResult«List«JyuchuMeisaiForm»»"
         },
-        "JyuchuInfo": {
+        "JyuchuForm": {
             "type": "object",
             "properties": {
                 "bikou": {
@@ -1862,7 +1913,7 @@
                 "meisaiList": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/JyuchuMeisaiInfo"
+                        "$ref": "#/definitions/JyuchuMeisaiForm"
                     }
                 },
                 "nouhinsyoBikou": {
@@ -1907,9 +1958,151 @@
                     "example": "yyyy-MM-dd'T'HH:mm:ss"
                 }
             },
+            "title": "JyuchuForm"
+        },
+        "JyuchuInfo": {
+            "type": "object",
+            "properties": {
+                "bikou": {
+                    "type": "string"
+                },
+                "chumonSyaFax": {
+                    "type": "string"
+                },
+                "chumonSyaJyusyo": {
+                    "type": "string"
+                },
+                "chumonSyaKaisyamei": {
+                    "type": "string"
+                },
+                "chumonSyaKana": {
+                    "type": "string"
+                },
+                "chumonSyaMail": {
+                    "type": "string"
+                },
+                "chumonSyaMeisho": {
+                    "type": "string"
+                },
+                "chumonSyaTelNo": {
+                    "type": "string"
+                },
+                "chumonSyaZipCode": {
+                    "type": "string"
+                },
+                "haisouGyosyaID": {
+                    "type": "string"
+                },
+                "haisousakiChui": {
+                    "type": "string"
+                },
+                "haisousakiFax": {
+                    "type": "string"
+                },
+                "haisousakiJyusyo": {
+                    "type": "string"
+                },
+                "haisousakiKaisyamei": {
+                    "type": "string"
+                },
+                "haisousakiKana": {
+                    "type": "string"
+                },
+                "haisousakiMeisho": {
+                    "type": "string"
+                },
+                "haisousakiTelNo": {
+                    "type": "string"
+                },
+                "haisousakiZipCode": {
+                    "type": "string"
+                },
+                "jyuchuHouhouID": {
+                    "type": "string"
+                },
+                "jyuchuKyotenID": {
+                    "type": "string"
+                },
+                "jyuchuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "jyuchuNo": {
+                    "type": "string"
+                },
+                "jyuchuTantousyaID": {
+                    "type": "string"
+                },
+                "kibouTouchakuBi": {
+                    "type": "string"
+                },
+                "kibouTouchakuJikan": {
+                    "type": "string"
+                },
+                "koguchiSu": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "kokyakuID": {
+                    "type": "string"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "meisaiList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/JyuchuMeisaiInfo"
+                    }
+                },
+                "nouhinsyoBikou": {
+                    "type": "string"
+                },
+                "seikyuKingaku": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "shouhiZei": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "shoukei": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "souryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "syukkaKanryoBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "syukkaYoteiBi": {
+                    "type": "string"
+                },
+                "taioJyokyoID": {
+                    "type": "string"
+                },
+                "tesuryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tourokuNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "tourokuSyaID": {
+                    "type": "string"
+                }
+            },
             "title": "JyuchuInfo"
         },
-        "JyuchuMeisaiInfo": {
+        "JyuchuMeisaiForm": {
             "type": "object",
             "properties": {
                 "bikou": {
@@ -1964,6 +2157,86 @@
                 },
                 "oyaShohinID": {
                     "type": "string"
+                },
+                "shiharaiHouhouID": {
+                    "type": "string"
+                },
+                "statusID": {
+                    "type": "string"
+                },
+                "suryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "syukkaHouhouID": {
+                    "type": "string"
+                },
+                "tanka": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tourokuNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "tourokuSyaID": {
+                    "type": "string"
+                }
+            },
+            "title": "JyuchuMeisaiForm"
+        },
+        "JyuchuMeisaiInfo": {
+            "type": "object",
+            "properties": {
+                "bikou": {
+                    "type": "string"
+                },
+                "hikiwatashiFlg": {
+                    "type": "string"
+                },
+                "hikiwatashiHouhouID": {
+                    "type": "string"
+                },
+                "jyuchuMeisaiNo": {
+                    "type": "string"
+                },
+                "jyuchuNo": {
+                    "type": "string"
+                },
+                "katabanInfo": {
+                    "$ref": "#/definitions/KatabanInfo"
+                },
+                "kingaku": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "kokyakuChumonBango": {
+                    "type": "string"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "makerID": {
+                    "type": "string"
+                },
+                "memo1": {
+                    "type": "string"
+                },
+                "memo2": {
+                    "type": "string"
+                },
+                "nyukinBi": {
+                    "type": "string"
+                },
+                "okurijyoBango": {
+                    "type": "string"
+                },
+                "oyaShohin": {
+                    "$ref": "#/definitions/KatabanInfo"
                 },
                 "shiharaiHouhouID": {
                     "type": "string"
