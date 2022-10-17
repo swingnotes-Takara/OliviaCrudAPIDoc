@@ -1940,7 +1940,8 @@
                     "format": "date"
                 },
                 "syukkaYoteiBi": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date"
                 },
                 "taioJyokyoID": {
                     "type": "string"
@@ -2083,7 +2084,8 @@
                     "format": "date"
                 },
                 "syukkaYoteiBi": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "taioJyokyoID": {
                     "type": "string"
@@ -2171,6 +2173,10 @@
                 "syukkaHouhouID": {
                     "type": "string"
                 },
+                "syukkaYoteiBi": {
+                    "type": "string",
+                    "format": "date"
+                },
                 "tanka": {
                     "type": "integer",
                     "format": "int32"
@@ -2250,6 +2256,10 @@
                 },
                 "syukkaHouhouID": {
                     "type": "string"
+                },
+                "syukkaYoteiBi": {
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "tanka": {
                     "type": "integer",
@@ -2712,6 +2722,10 @@
                 "meisaiKoushinSyaID": {
                     "type": "string"
                 },
+                "meisaiSyukkaYoteiBi": {
+                    "type": "string",
+                    "format": "date"
+                },
                 "meisaiTourokuNichiji": {
                     "type": "string",
                     "example": "yyyy-MM-dd'T'HH:mm:ss"
@@ -2780,7 +2794,8 @@
                     "format": "date"
                 },
                 "syukkaYoteiBi": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date"
                 },
                 "taioJyokyoID": {
                     "type": "string"
