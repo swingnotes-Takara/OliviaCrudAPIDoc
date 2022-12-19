@@ -532,7 +532,7 @@
                         "description": "[検索条件]出荷予定日From",
                         "required": false,
                         "type": "string",
-                        "format": "date-time"
+                        "format": "date"
                     },
                     {
                         "name": "syukka_to",
@@ -540,7 +540,7 @@
                         "description": "[検索条件]出荷予定日To",
                         "required": false,
                         "type": "string",
-                        "format": "date-time"
+                        "format": "date"
                     },
                     {
                         "name": "chumonsya",
@@ -638,7 +638,7 @@
                         "type": "boolean"
                     },
                     {
-                        "name": "shohinSyubetsu",
+                        "name": "shohin_syubetsu",
                         "in": "query",
                         "description": "[検索条件]商品種別",
                         "required": false,
@@ -684,7 +684,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
                         }
                     },
                     "401": {
@@ -719,7 +722,7 @@
                         "type": "boolean"
                     },
                     {
-                        "name": "shohinSyubetsu",
+                        "name": "shohin_syubetsu",
                         "in": "query",
                         "description": "[検索条件]商品種別",
                         "required": false,
@@ -765,7 +768,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
                         }
                     },
                     "401": {
@@ -800,7 +806,7 @@
                         "type": "boolean"
                     },
                     {
-                        "name": "shohinSyubetsu",
+                        "name": "shohin_syubetsu",
                         "in": "query",
                         "description": "[検索条件]商品種別",
                         "required": false,
@@ -846,7 +852,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
                         }
                     },
                     "401": {
@@ -881,7 +890,7 @@
                         "type": "boolean"
                     },
                     {
-                        "name": "shohinSyubetsu",
+                        "name": "shohin_syubetsu",
                         "in": "query",
                         "description": "[検索条件]商品種別",
                         "required": false,
@@ -927,7 +936,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
                         }
                     },
                     "401": {
@@ -1008,7 +1020,10 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "object"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
                         }
                     },
                     "401": {
@@ -1140,9 +1155,6 @@
                                 "description": "API Token"
                             }
                         }
-                    },
-                    "201": {
-                        "description": "Created"
                     },
                     "401": {
                         "description": "Unauthorized"
