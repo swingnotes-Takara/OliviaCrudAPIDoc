@@ -15,6 +15,10 @@
     "basePath": "/",
     "tags": [
         {
+            "name": "chosyoku-list-controller",
+            "description": "Chosyoku List Controller"
+        },
+        {
             "name": "jyuchu-controller",
             "description": "Jyuchu Controller"
         },
@@ -27,8 +31,8 @@
             "description": "Kokyaku Controller"
         },
         {
-            "name": "list-controller",
-            "description": "List Controller"
+            "name": "label-syutsuryoku-list-controller",
+            "description": "Label Syutsuryoku List Controller"
         },
         {
             "name": "login-controller",
@@ -487,7 +491,7 @@
         "/v1/list/chosyoku": {
             "get": {
                 "tags": [
-                    "list-controller"
+                    "chosyoku-list-controller"
                 ],
                 "summary": "調色リスト情報取得",
                 "description": "調色リスト情報を取得します。",
@@ -603,7 +607,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/PagingData«VChosyoku»"
+                            "$ref": "#/definitions/PagingData«ChosyokuInfo»"
                         }
                     },
                     "401": {
@@ -621,7 +625,7 @@
         "/v1/list/chosyoku/comboitems/colorname": {
             "get": {
                 "tags": [
-                    "list-controller"
+                    "chosyoku-list-controller"
                 ],
                 "summary": "色名コンボボックス情報取得",
                 "description": "色名コンボボックス情報を取得します。",
@@ -705,7 +709,7 @@
         "/v1/list/chosyoku/comboitems/colorsample": {
             "get": {
                 "tags": [
-                    "list-controller"
+                    "chosyoku-list-controller"
                 ],
                 "summary": "色見本種別コンボボックス情報取得",
                 "description": "色見本種別コンボボックス情報を取得します。",
@@ -789,7 +793,7 @@
         "/v1/list/chosyoku/comboitems/contents": {
             "get": {
                 "tags": [
-                    "list-controller"
+                    "chosyoku-list-controller"
                 ],
                 "summary": "容量コンボボックス情報取得",
                 "description": "容量コンボボックス情報を取得します。",
@@ -873,7 +877,7 @@
         "/v1/list/chosyoku/comboitems/gloss": {
             "get": {
                 "tags": [
-                    "list-controller"
+                    "chosyoku-list-controller"
                 ],
                 "summary": "艶コンボボックス情報取得",
                 "description": "艶コンボボックス情報を取得します。",
@@ -957,7 +961,7 @@
         "/v1/list/chosyoku/comboitems/itemtype": {
             "get": {
                 "tags": [
-                    "list-controller"
+                    "chosyoku-list-controller"
                 ],
                 "summary": "商品種別コンボボックス情報取得",
                 "description": "商品種別コンボボックス情報を取得します。",
@@ -1041,7 +1045,7 @@
         "/v1/list/chosyoku/{jyuchuNo}/{jyuchuMeisaiNo}": {
             "post": {
                 "tags": [
-                    "list-controller"
+                    "chosyoku-list-controller"
                 ],
                 "summary": "調色状況更新",
                 "description": "調色状況を更新します。",
@@ -1113,6 +1117,635 @@
                 }
             }
         },
+        "/v1/list/label": {
+            "get": {
+                "tags": [
+                    "label-syutsuryoku-list-controller"
+                ],
+                "summary": "ラベル出力リスト情報取得",
+                "description": "ラベル出力リスト情報を取得します。",
+                "operationId": "getLabelListUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "リクエストするページ番号",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "ページごとのレコード数",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "syutsuryoku_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未出力/出力済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]出荷済",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "syukka_from",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日From",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "syukka_to",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日To",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "chumonsya",
+                        "in": "query",
+                        "description": "[検索条件]注文者名(部分一致)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PagingData«LabelSyutsuryokuInfo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/label/comboitems/colorname": {
+            "get": {
+                "tags": [
+                    "label-syutsuryoku-list-controller"
+                ],
+                "summary": "色名コンボボックス情報取得",
+                "description": "色名コンボボックス情報を取得します。",
+                "operationId": "getChosyokuColorNameUsingGET_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "chosyoku_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未調色/調色済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/label/comboitems/colorsample": {
+            "get": {
+                "tags": [
+                    "label-syutsuryoku-list-controller"
+                ],
+                "summary": "色見本種別コンボボックス情報取得",
+                "description": "色見本種別コンボボックス情報を取得します。",
+                "operationId": "getChosyokuColorSampleUsingGET_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "chosyoku_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未調色/調色済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/label/comboitems/contents": {
+            "get": {
+                "tags": [
+                    "label-syutsuryoku-list-controller"
+                ],
+                "summary": "容量コンボボックス情報取得",
+                "description": "容量コンボボックス情報を取得します。",
+                "operationId": "getChosyokuContentsUsingGET_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "chosyoku_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未調色/調色済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/label/comboitems/gloss": {
+            "get": {
+                "tags": [
+                    "label-syutsuryoku-list-controller"
+                ],
+                "summary": "艶コンボボックス情報取得",
+                "description": "艶コンボボックス情報を取得します。",
+                "operationId": "getChosyokuGlossUsingGET_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "chosyoku_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未調色/調色済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/label/comboitems/itemtype": {
+            "get": {
+                "tags": [
+                    "label-syutsuryoku-list-controller"
+                ],
+                "summary": "商品種別コンボボックス情報取得",
+                "description": "商品種別コンボボックス情報を取得します。",
+                "operationId": "getChosyokuItemtypeUsingGET_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "chosyoku_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未調色/調色済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/label/{jyuchuNo}/{jyuchuMeisaiNo}": {
+            "post": {
+                "tags": [
+                    "label-syutsuryoku-list-controller"
+                ],
+                "summary": "調色状況更新",
+                "description": "調色状況を更新します。",
+                "operationId": "updateUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "jyuchuNo",
+                        "in": "path",
+                        "description": "jyuchuNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jyuchuMeisaiNo",
+                        "in": "path",
+                        "description": "jyuchuMeisaiNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "form",
+                        "description": "form",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LabelSyutsuryokuListForm"
+                        }
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateApiResult«LabelSyutsuryokuListForm»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/v1/login": {
             "post": {
                 "tags": [
@@ -1156,8 +1789,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized"
+                    "403": {
+                        "description": "Forbidden"
                     }
                 }
             }
@@ -2396,6 +3029,110 @@
             },
             "title": "CategorySentakushiInfo"
         },
+        "ChosyokuInfo": {
+            "type": "object",
+            "properties": {
+                "bikou": {
+                    "type": "string"
+                },
+                "chosyokuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "chosyokuTantosyaID": {
+                    "type": "string"
+                },
+                "chosyokuTantosyaMei": {
+                    "type": "string"
+                },
+                "chumonSyaKaisyamei": {
+                    "type": "string"
+                },
+                "chumonSyaMeisho": {
+                    "type": "string"
+                },
+                "iro": {
+                    "type": "string"
+                },
+                "iroMei": {
+                    "type": "string"
+                },
+                "iromihonSyubetsu": {
+                    "type": "string"
+                },
+                "iromihonSyubetsuMei": {
+                    "type": "string"
+                },
+                "jyuchuHouhouMei": {
+                    "type": "string"
+                },
+                "jyuchuMeisaiNo": {
+                    "type": "string"
+                },
+                "jyuchuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "jyuchuNo": {
+                    "type": "string"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "kyotenMei": {
+                    "type": "string"
+                },
+                "shohinSyubetsu": {
+                    "type": "string"
+                },
+                "shohinSyubetsuMei": {
+                    "type": "string"
+                },
+                "statusMei": {
+                    "type": "string"
+                },
+                "suryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "syukkaKanryoBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "syukkaYoteiBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "tanka": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tourokuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "tourokuSyaID": {
+                    "type": "string"
+                },
+                "tsuya": {
+                    "type": "string"
+                },
+                "tsuyaMei": {
+                    "type": "string"
+                },
+                "youryo": {
+                    "type": "string"
+                },
+                "youryoMei": {
+                    "type": "string"
+                }
+            },
+            "title": "ChosyokuInfo"
+        },
         "ChosyokuListForm": {
             "type": "object",
             "properties": {
@@ -2984,6 +3721,126 @@
             },
             "title": "KokyakuInfo"
         },
+        "LabelSyutsuryokuInfo": {
+            "type": "object",
+            "properties": {
+                "bikou": {
+                    "type": "string"
+                },
+                "chosyokuTantosyaMei": {
+                    "type": "string"
+                },
+                "chumonSyaKaisyamei": {
+                    "type": "string"
+                },
+                "chumonSyaMeisho": {
+                    "type": "string"
+                },
+                "iro": {
+                    "type": "string"
+                },
+                "iroMei": {
+                    "type": "string"
+                },
+                "iromihonSyubetsu": {
+                    "type": "string"
+                },
+                "iromihonSyubetsuMei": {
+                    "type": "string"
+                },
+                "jyuchuHouhouMei": {
+                    "type": "string"
+                },
+                "jyuchuMeisaiNo": {
+                    "type": "string"
+                },
+                "jyuchuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "jyuchuNo": {
+                    "type": "string"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "kyotenMei": {
+                    "type": "string"
+                },
+                "shohinSyubetsu": {
+                    "type": "string"
+                },
+                "shohinSyubetsuMei": {
+                    "type": "string"
+                },
+                "statusMei": {
+                    "type": "string"
+                },
+                "suryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "syukkaKanryoBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "syukkaYoteiBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "syutsuryokuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "syutsuryokuTantosyaID": {
+                    "type": "string"
+                },
+                "tanka": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tourokuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "tourokuSyaID": {
+                    "type": "string"
+                },
+                "tsuya": {
+                    "type": "string"
+                },
+                "tsuyaMei": {
+                    "type": "string"
+                },
+                "youryo": {
+                    "type": "string"
+                },
+                "youryoMei": {
+                    "type": "string"
+                }
+            },
+            "title": "LabelSyutsuryokuInfo"
+        },
+        "LabelSyutsuryokuListForm": {
+            "type": "object",
+            "properties": {
+                "koushinNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "printed": {
+                    "type": "boolean"
+                }
+            },
+            "title": "LabelSyutsuryokuListForm"
+        },
         "MasterInfo": {
             "type": "object",
             "properties": {
@@ -2995,6 +3852,30 @@
                 }
             },
             "title": "MasterInfo"
+        },
+        "PagingData«ChosyokuInfo»": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ChosyokuInfo"
+                    }
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PagingData«ChosyokuInfo»"
         },
         "PagingData«KatabanInfo»": {
             "type": "object",
@@ -3044,7 +3925,7 @@
             },
             "title": "PagingData«KokyakuInfo»"
         },
-        "PagingData«VChosyoku»": {
+        "PagingData«LabelSyutsuryokuInfo»": {
             "type": "object",
             "properties": {
                 "currentPage": {
@@ -3054,7 +3935,7 @@
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/VChosyoku"
+                        "$ref": "#/definitions/LabelSyutsuryokuInfo"
                     }
                 },
                 "totalElements": {
@@ -3066,7 +3947,7 @@
                     "format": "int32"
                 }
             },
-            "title": "PagingData«VChosyoku»"
+            "title": "PagingData«LabelSyutsuryokuInfo»"
         },
         "PagingData«VJyuchu»": {
             "type": "object",
@@ -3215,6 +4096,22 @@
             },
             "title": "UpdateApiResult«JyuchuMeisaiForm»"
         },
+        "UpdateApiResult«LabelSyutsuryokuListForm»": {
+            "type": "object",
+            "properties": {
+                "errCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "errMsg": {
+                    "type": "string"
+                },
+                "resultData": {
+                    "$ref": "#/definitions/LabelSyutsuryokuListForm"
+                }
+            },
+            "title": "UpdateApiResult«LabelSyutsuryokuListForm»"
+        },
         "UpdateApiResult«List«JyuchuMeisaiForm»»": {
             "type": "object",
             "properties": {
@@ -3254,114 +4151,6 @@
                 }
             },
             "title": "UserInfo"
-        },
-        "VChosyoku": {
-            "type": "object",
-            "properties": {
-                "bikou": {
-                    "type": "string"
-                },
-                "chosyokuNichiji": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "chosyokuTantosyaID": {
-                    "type": "string"
-                },
-                "chosyokuTantosyaMei": {
-                    "type": "string"
-                },
-                "chumonSyaKaisyamei": {
-                    "type": "string"
-                },
-                "chumonSyaMeisho": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "iro": {
-                    "type": "string"
-                },
-                "iroMei": {
-                    "type": "string"
-                },
-                "iromihonSyubetsu": {
-                    "type": "string"
-                },
-                "iromihonSyubetsuMei": {
-                    "type": "string"
-                },
-                "jyuchuHouhouMei": {
-                    "type": "string"
-                },
-                "jyuchuMeisaiNo": {
-                    "type": "string"
-                },
-                "jyuchuNichiji": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "jyuchuNo": {
-                    "type": "string"
-                },
-                "koushinNichiji": {
-                    "type": "string",
-                    "example": "yyyy-MM-dd'T'HH:mm:ss"
-                },
-                "koushinSyaID": {
-                    "type": "string"
-                },
-                "kyotenMei": {
-                    "type": "string"
-                },
-                "shohinSyubetsu": {
-                    "type": "string"
-                },
-                "shohinSyubetsuMei": {
-                    "type": "string"
-                },
-                "statusMei": {
-                    "type": "string"
-                },
-                "suryo": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "syukkaKanryoBi": {
-                    "type": "string",
-                    "format": "date"
-                },
-                "syukkaYoteiBi": {
-                    "type": "string",
-                    "format": "date"
-                },
-                "tanka": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "tourokuNichiji": {
-                    "type": "string",
-                    "example": "yyyy-MM-dd'T'HH:mm:ss"
-                },
-                "tourokuSyaID": {
-                    "type": "string"
-                },
-                "tsuya": {
-                    "type": "string"
-                },
-                "tsuyaMei": {
-                    "type": "string"
-                },
-                "youryo": {
-                    "type": "string"
-                },
-                "youryoMei": {
-                    "type": "string"
-                }
-            },
-            "title": "VChosyoku"
         },
         "VJyuchu": {
             "type": "object",
