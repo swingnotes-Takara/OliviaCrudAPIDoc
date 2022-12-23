@@ -1258,15 +1258,15 @@
                 ],
                 "summary": "色名コンボボックス情報取得",
                 "description": "色名コンボボックス情報を取得します。",
-                "operationId": "getChosyokuColorNameUsingGET_1",
+                "operationId": "getLabelSyutsuryokuColorNameUsingGET",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "chosyoku_zumi",
+                        "name": "syutsuryoku_zumi",
                         "in": "query",
-                        "description": "[検索条件]未調色/調色済",
+                        "description": "[検索条件]未出力/出力済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -1342,15 +1342,15 @@
                 ],
                 "summary": "色見本種別コンボボックス情報取得",
                 "description": "色見本種別コンボボックス情報を取得します。",
-                "operationId": "getChosyokuColorSampleUsingGET_1",
+                "operationId": "getLabelSyutsuryokuColorSampleUsingGET",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "chosyoku_zumi",
+                        "name": "syutsuryoku_zumi",
                         "in": "query",
-                        "description": "[検索条件]未調色/調色済",
+                        "description": "[検索条件]未出力/出力済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -1426,15 +1426,15 @@
                 ],
                 "summary": "容量コンボボックス情報取得",
                 "description": "容量コンボボックス情報を取得します。",
-                "operationId": "getChosyokuContentsUsingGET_1",
+                "operationId": "getLabelSyutsuryokuContentsUsingGET",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "chosyoku_zumi",
+                        "name": "syutsuryoku_zumi",
                         "in": "query",
-                        "description": "[検索条件]未調色/調色済",
+                        "description": "[検索条件]未出力/出力済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -1510,15 +1510,15 @@
                 ],
                 "summary": "艶コンボボックス情報取得",
                 "description": "艶コンボボックス情報を取得します。",
-                "operationId": "getChosyokuGlossUsingGET_1",
+                "operationId": "getLabelSyutsuryokuGlossUsingGET",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "chosyoku_zumi",
+                        "name": "syutsuryoku_zumi",
                         "in": "query",
-                        "description": "[検索条件]未調色/調色済",
+                        "description": "[検索条件]未出力/出力済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -1594,15 +1594,15 @@
                 ],
                 "summary": "商品種別コンボボックス情報取得",
                 "description": "商品種別コンボボックス情報を取得します。",
-                "operationId": "getChosyokuItemtypeUsingGET_1",
+                "operationId": "getLabelSyutsuryokuItemtypeUsingGET",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "chosyoku_zumi",
+                        "name": "syutsuryoku_zumi",
                         "in": "query",
-                        "description": "[検索条件]未調色/調色済",
+                        "description": "[検索条件]未出力/出力済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -1789,8 +1789,8 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden"
+                    "401": {
+                        "description": "Unauthorized"
                     }
                 }
             }
