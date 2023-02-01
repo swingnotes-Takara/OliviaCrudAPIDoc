@@ -4742,6 +4742,9 @@
                 "jyuchuNo": {
                     "type": "string"
                 },
+                "kokyakuID": {
+                    "type": "string"
+                },
                 "koushinNichiji": {
                     "type": "string",
                     "format": "date-time"
@@ -4751,6 +4754,10 @@
                 },
                 "kyotenMei": {
                     "type": "string"
+                },
+                "lot": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "shohinSyubetsu": {
                     "type": "string"
