@@ -1272,9 +1272,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "tsumekae_zumi",
+                        "name": "haitatsu_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未配達/配達済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -1356,9 +1356,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "tsumekae_zumi",
+                        "name": "haitatsu_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未配達/配達済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -1440,9 +1440,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "tsumekae_zumi",
+                        "name": "haitatsu_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未配達/配達済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -1524,9 +1524,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "tsumekae_zumi",
+                        "name": "haitatsu_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未配達/配達済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -1608,9 +1608,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "tsumekae_zumi",
+                        "name": "haitatsu_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未配達/配達済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -4421,10 +4421,22 @@
                 "bikou": {
                     "type": "string"
                 },
+                "chumonSyaJyusyo": {
+                    "type": "string"
+                },
                 "chumonSyaKaisyamei": {
                     "type": "string"
                 },
                 "chumonSyaMeisho": {
+                    "type": "string"
+                },
+                "chumonSyaTelNo": {
+                    "type": "string"
+                },
+                "chumonSyaZipCode": {
+                    "type": "string"
+                },
+                "haisousakiChui": {
                     "type": "string"
                 },
                 "haitatsuNichiji": {
@@ -4432,6 +4444,9 @@
                     "format": "date-time"
                 },
                 "haitatsuTantosyaID": {
+                    "type": "string"
+                },
+                "haitatsuTantosyaMei": {
                     "type": "string"
                 },
                 "iro": {
@@ -4459,6 +4474,15 @@
                 "jyuchuNo": {
                     "type": "string"
                 },
+                "jyuchuTantousyaMei": {
+                    "type": "string"
+                },
+                "kibouTouchakuBi": {
+                    "type": "string"
+                },
+                "kibouTouchakuJikan": {
+                    "type": "string"
+                },
                 "kokyakuID": {
                     "type": "string"
                 },
@@ -4472,6 +4496,13 @@
                 "kyotenMei": {
                     "type": "string"
                 },
+                "nouhinsyoBikou": {
+                    "type": "string"
+                },
+                "seikyuKingaku": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "shiharaiHouhouMei": {
                     "type": "string"
                 },
@@ -4480,6 +4511,14 @@
                 },
                 "shohinSyubetsuMei": {
                     "type": "string"
+                },
+                "shoukei": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "souryo": {
+                    "type": "integer",
+                    "format": "int32"
                 },
                 "statusMei": {
                     "type": "string"
@@ -4500,14 +4539,15 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "tesuryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "tourokuNichiji": {
                     "type": "string",
                     "format": "date-time"
                 },
                 "tourokuSyaID": {
-                    "type": "string"
-                },
-                "tsumekaeTantosyaMei": {
                     "type": "string"
                 },
                 "tsuya": {
@@ -5498,6 +5538,9 @@
                     "type": "string"
                 },
                 "chumonSyaMeisho": {
+                    "type": "string"
+                },
+                "haisousakiChui": {
                     "type": "string"
                 },
                 "iro": {
