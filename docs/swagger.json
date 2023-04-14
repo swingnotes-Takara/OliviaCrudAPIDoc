@@ -55,6 +55,10 @@
             "description": "Master Info Controller"
         },
         {
+            "name": "nyukin-list-controller",
+            "description": "Nyukin List Controller"
+        },
+        {
             "name": "tentou-hikitori-list-controller",
             "description": "Tentou Hikitori List Controller"
         },
@@ -2327,7 +2331,7 @@
                 ],
                 "summary": "引取状況更新",
                 "description": "引取状況を更新します。",
-                "operationId": "updateUsingPOST_4",
+                "operationId": "updateUsingPOST_5",
                 "consumes": [
                     "application/json"
                 ],
@@ -3839,6 +3843,180 @@
                 }
             }
         },
+        "/v1/list/nyukin": {
+            "get": {
+                "tags": [
+                    "nyukin-list-controller"
+                ],
+                "summary": "未入金リスト情報取得",
+                "description": "未入金リスト情報を取得します。",
+                "operationId": "getLabelListUsingGET_2",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "リクエストするページ番号",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "ページごとのレコード数",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "nyukin_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未入金/入金済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]出荷済",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "syukka_from",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日From",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "syukka_to",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日To",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "chumonsya",
+                        "in": "query",
+                        "description": "[検索条件]注文者名(部分一致)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jyuchu_no",
+                        "in": "query",
+                        "description": "[検索条件]受注番号(完全一致)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PagingData«HaitatsuInfo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/nyukin/{jyuchuNo}": {
+            "post": {
+                "tags": [
+                    "nyukin-list-controller"
+                ],
+                "summary": "入金状況更新",
+                "description": "入金状況を更新します。",
+                "operationId": "updateUsingPOST_4",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "jyuchuNo",
+                        "in": "path",
+                        "description": "jyuchuNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "form",
+                        "description": "form",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NyukinListForm"
+                        }
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateApiResult«NyukinListForm»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/v1/list/tsumekae": {
             "get": {
                 "tags": [
@@ -3846,7 +4024,7 @@
                 ],
                 "summary": "在庫詰替リスト情報取得",
                 "description": "在庫詰替リスト情報を取得します。",
-                "operationId": "getLabelListUsingGET_2",
+                "operationId": "getLabelListUsingGET_3",
                 "produces": [
                     "application/json"
                 ],
@@ -4400,7 +4578,7 @@
                 ],
                 "summary": "在庫詰替状況更新",
                 "description": "在庫詰替状況を更新します。",
-                "operationId": "updateUsingPOST_5",
+                "operationId": "updateUsingPOST_6",
                 "consumes": [
                     "application/json"
                 ],
@@ -6873,6 +7051,22 @@
             },
             "title": "MasterInfo"
         },
+        "NyukinListForm": {
+            "type": "object",
+            "properties": {
+                "koushinNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "paied": {
+                    "type": "boolean"
+                }
+            },
+            "title": "NyukinListForm"
+        },
         "PagingData«ChosyokuInfo»": {
             "type": "object",
             "properties": {
@@ -7574,6 +7768,22 @@
                 }
             },
             "title": "UpdateApiResult«MakerHacchuListForm»"
+        },
+        "UpdateApiResult«NyukinListForm»": {
+            "type": "object",
+            "properties": {
+                "errCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "errMsg": {
+                    "type": "string"
+                },
+                "resultData": {
+                    "$ref": "#/definitions/NyukinListForm"
+                }
+            },
+            "title": "UpdateApiResult«NyukinListForm»"
         },
         "UpdateApiResult«TentouHikitoriListForm»": {
             "type": "object",
