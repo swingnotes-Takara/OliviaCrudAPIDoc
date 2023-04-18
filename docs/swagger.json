@@ -6500,6 +6500,9 @@
                 "taioJyokyoID": {
                     "type": "string"
                 },
+                "taioJyokyoMei": {
+                    "type": "string"
+                },
                 "tesuryo": {
                     "type": "integer",
                     "format": "int32"
