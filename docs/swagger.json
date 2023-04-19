@@ -3934,7 +3934,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/PagingData«HaitatsuInfo»"
+                            "$ref": "#/definitions/PagingData«NyukinInfo»"
                         }
                     },
                     "401": {
@@ -7081,6 +7081,91 @@
             },
             "title": "MasterInfo"
         },
+        "NyukinInfo": {
+            "type": "object",
+            "properties": {
+                "bikou": {
+                    "type": "string"
+                },
+                "chumonSyaMeisho": {
+                    "type": "string"
+                },
+                "jyuchuHouhouMei": {
+                    "type": "string"
+                },
+                "jyuchuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "jyuchuNo": {
+                    "type": "string"
+                },
+                "jyuchuTantousyaMei": {
+                    "type": "string"
+                },
+                "kokyakuID": {
+                    "type": "string"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "kyotenMei": {
+                    "type": "string"
+                },
+                "nouhinsyoBikou": {
+                    "type": "string"
+                },
+                "nyukinKakuninNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "nyukinKakuninTantosyaID": {
+                    "type": "string"
+                },
+                "nyukinKakuninTantosyaMei": {
+                    "type": "string"
+                },
+                "seikyuKingaku": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "shoukei": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "souryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "syukkaKanryoBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "syukkaYoteiBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "taioJyokyoMei": {
+                    "type": "string"
+                },
+                "tesuryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tourokuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "tourokuSyaID": {
+                    "type": "string"
+                }
+            },
+            "title": "NyukinInfo"
+        },
         "NyukinListForm": {
             "type": "object",
             "properties": {
@@ -7240,6 +7325,30 @@
                 }
             },
             "title": "PagingData«MakerHacchuInfo»"
+        },
+        "PagingData«NyukinInfo»": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NyukinInfo"
+                    }
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PagingData«NyukinInfo»"
         },
         "PagingData«TentouHikitoriInfo»": {
             "type": "object",
