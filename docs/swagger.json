@@ -59,6 +59,10 @@
             "description": "Nyukin List Controller"
         },
         {
+            "name": "picking-list-controller",
+            "description": "Picking List Controller"
+        },
+        {
             "name": "tentou-hikitori-list-controller",
             "description": "Tentou Hikitori List Controller"
         },
@@ -1911,7 +1915,7 @@
                 ],
                 "summary": "色名コンボボックス情報取得",
                 "description": "色名コンボボックス情報を取得します。",
-                "operationId": "getColorNameComboUsingGET_4",
+                "operationId": "getColorNameComboUsingGET_5",
                 "produces": [
                     "application/json"
                 ],
@@ -1995,7 +1999,7 @@
                 ],
                 "summary": "色見本種別コンボボックス情報取得",
                 "description": "色見本種別コンボボックス情報を取得します。",
-                "operationId": "getColorSampleComboUsingGET_4",
+                "operationId": "getColorSampleComboUsingGET_5",
                 "produces": [
                     "application/json"
                 ],
@@ -2079,7 +2083,7 @@
                 ],
                 "summary": "容量コンボボックス情報取得",
                 "description": "容量コンボボックス情報を取得します。",
-                "operationId": "getContentsComboUsingGET_4",
+                "operationId": "getContentsComboUsingGET_5",
                 "produces": [
                     "application/json"
                 ],
@@ -2163,7 +2167,7 @@
                 ],
                 "summary": "艶コンボボックス情報取得",
                 "description": "艶コンボボックス情報を取得します。",
-                "operationId": "getGlossComboUsingGET_4",
+                "operationId": "getGlossComboUsingGET_5",
                 "produces": [
                     "application/json"
                 ],
@@ -2247,7 +2251,7 @@
                 ],
                 "summary": "商品種別コンボボックス情報取得",
                 "description": "商品種別コンボボックス情報を取得します。",
-                "operationId": "getItemtypeComboUsingGET_4",
+                "operationId": "getItemtypeComboUsingGET_5",
                 "produces": [
                     "application/json"
                 ],
@@ -2331,7 +2335,7 @@
                 ],
                 "summary": "引取状況更新",
                 "description": "引取状況を更新します。",
-                "operationId": "updateUsingPOST_5",
+                "operationId": "updateUsingPOST_6",
                 "consumes": [
                     "application/json"
                 ],
@@ -4017,6 +4021,690 @@
                 }
             }
         },
+        "/v1/list/picking": {
+            "get": {
+                "tags": [
+                    "picking-list-controller"
+                ],
+                "summary": "ピッキングリスト情報取得",
+                "description": "ピッキングリスト情報を取得します。",
+                "operationId": "getPickingListUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "リクエストするページ番号",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "ページごとのレコード数",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "picking_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未ピッキング/ピッキング済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]出荷済",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "syukka_from",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日From",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "syukka_to",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日To",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PagingData«PickingInfo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/picking/comboitems/colorname": {
+            "get": {
+                "tags": [
+                    "picking-list-controller"
+                ],
+                "summary": "色名コンボボックス情報取得",
+                "description": "色名コンボボックス情報を取得します。",
+                "operationId": "getColorNameComboUsingGET_4",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "picking_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未詰替/詰替済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/picking/comboitems/colorsample": {
+            "get": {
+                "tags": [
+                    "picking-list-controller"
+                ],
+                "summary": "色見本種別コンボボックス情報取得",
+                "description": "色見本種別コンボボックス情報を取得します。",
+                "operationId": "getColorSampleComboUsingGET_4",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "picking_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未詰替/詰替済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/picking/comboitems/contents": {
+            "get": {
+                "tags": [
+                    "picking-list-controller"
+                ],
+                "summary": "容量コンボボックス情報取得",
+                "description": "容量コンボボックス情報を取得します。",
+                "operationId": "getContentsComboUsingGET_4",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "picking_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未詰替/詰替済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/picking/comboitems/gloss": {
+            "get": {
+                "tags": [
+                    "picking-list-controller"
+                ],
+                "summary": "艶コンボボックス情報取得",
+                "description": "艶コンボボックス情報を取得します。",
+                "operationId": "getGlossComboUsingGET_4",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "picking_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未詰替/詰替済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/picking/comboitems/itemtype": {
+            "get": {
+                "tags": [
+                    "picking-list-controller"
+                ],
+                "summary": "商品種別コンボボックス情報取得",
+                "description": "商品種別コンボボックス情報を取得します。",
+                "operationId": "getItemtypeComboUsingGET_4",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "picking_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未詰替/詰替済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/picking/jyuchulist/{kataban}": {
+            "get": {
+                "tags": [
+                    "picking-list-controller"
+                ],
+                "summary": "ピッキング受注リスト情報取得",
+                "description": "ピッキング受注リスト情報を取得します。",
+                "operationId": "getPickingJyuchuListUsingGET",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "リクエストするページ番号",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "ページごとのレコード数",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "kataban",
+                        "in": "path",
+                        "description": "kataban",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PagingData«PickingJyuchuListInfo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/picking/{kataban}": {
+            "post": {
+                "tags": [
+                    "picking-list-controller"
+                ],
+                "summary": "ピッキング状況更新",
+                "description": "在庫詰替状況を更新します。",
+                "operationId": "updateUsingPOST_5",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "kataban",
+                        "in": "path",
+                        "description": "kataban",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "form",
+                        "description": "form",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PickingListForm"
+                        }
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateApiResult«PickingListForm»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/v1/list/tsumekae": {
             "get": {
                 "tags": [
@@ -4158,7 +4846,7 @@
                 ],
                 "summary": "色名コンボボックス情報取得",
                 "description": "色名コンボボックス情報を取得します。",
-                "operationId": "getColorNameComboUsingGET_5",
+                "operationId": "getColorNameComboUsingGET_6",
                 "produces": [
                     "application/json"
                 ],
@@ -4242,7 +4930,7 @@
                 ],
                 "summary": "色見本種別コンボボックス情報取得",
                 "description": "色見本種別コンボボックス情報を取得します。",
-                "operationId": "getColorSampleComboUsingGET_5",
+                "operationId": "getColorSampleComboUsingGET_6",
                 "produces": [
                     "application/json"
                 ],
@@ -4326,7 +5014,7 @@
                 ],
                 "summary": "容量コンボボックス情報取得",
                 "description": "容量コンボボックス情報を取得します。",
-                "operationId": "getContentsComboUsingGET_5",
+                "operationId": "getContentsComboUsingGET_6",
                 "produces": [
                     "application/json"
                 ],
@@ -4410,7 +5098,7 @@
                 ],
                 "summary": "艶コンボボックス情報取得",
                 "description": "艶コンボボックス情報を取得します。",
-                "operationId": "getGlossComboUsingGET_5",
+                "operationId": "getGlossComboUsingGET_6",
                 "produces": [
                     "application/json"
                 ],
@@ -4494,7 +5182,7 @@
                 ],
                 "summary": "商品種別コンボボックス情報取得",
                 "description": "商品種別コンボボックス情報を取得します。",
-                "operationId": "getItemtypeComboUsingGET_5",
+                "operationId": "getItemtypeComboUsingGET_6",
                 "produces": [
                     "application/json"
                 ],
@@ -4578,7 +5266,7 @@
                 ],
                 "summary": "在庫詰替状況更新",
                 "description": "在庫詰替状況を更新します。",
-                "operationId": "updateUsingPOST_6",
+                "operationId": "updateUsingPOST_7",
                 "consumes": [
                     "application/json"
                 ],
@@ -7350,6 +8038,54 @@
             },
             "title": "PagingData«NyukinInfo»"
         },
+        "PagingData«PickingInfo»": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PickingInfo"
+                    }
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PagingData«PickingInfo»"
+        },
+        "PagingData«PickingJyuchuListInfo»": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PickingJyuchuListInfo"
+                    }
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PagingData«PickingJyuchuListInfo»"
+        },
         "PagingData«TentouHikitoriInfo»": {
             "type": "object",
             "properties": {
@@ -7421,6 +8157,148 @@
                 }
             },
             "title": "PagingData«VJyuchu»"
+        },
+        "PickingInfo": {
+            "type": "object",
+            "properties": {
+                "iro": {
+                    "type": "string"
+                },
+                "iroMei": {
+                    "type": "string"
+                },
+                "iromihonSyubetsu": {
+                    "type": "string"
+                },
+                "iromihonSyubetsuMei": {
+                    "type": "string"
+                },
+                "kataban": {
+                    "type": "string"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "pickingNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "pickingTantosyaID": {
+                    "type": "string"
+                },
+                "pickingTantosyaMei": {
+                    "type": "string"
+                },
+                "shohinSyubetsu": {
+                    "type": "string"
+                },
+                "shohinSyubetsuMei": {
+                    "type": "string"
+                },
+                "suryo": {
+                    "type": "number"
+                },
+                "tanka": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tourokuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "tourokuSyaID": {
+                    "type": "string"
+                },
+                "tsuya": {
+                    "type": "string"
+                },
+                "tsuyaMei": {
+                    "type": "string"
+                },
+                "youryo": {
+                    "type": "string"
+                },
+                "youryoMei": {
+                    "type": "string"
+                },
+                "zaikoNashiKosu": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PickingInfo"
+        },
+        "PickingJyuchuListInfo": {
+            "type": "object",
+            "properties": {
+                "bikou": {
+                    "type": "string"
+                },
+                "chumonSyaKaisyamei": {
+                    "type": "string"
+                },
+                "chumonSyaMeisho": {
+                    "type": "string"
+                },
+                "jyuchuHouhouMei": {
+                    "type": "string"
+                },
+                "jyuchuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "jyuchuNo": {
+                    "type": "string"
+                },
+                "jyuchuTantousyaMei": {
+                    "type": "string"
+                },
+                "kataban": {
+                    "type": "string"
+                },
+                "kyotenMei": {
+                    "type": "string"
+                },
+                "nouhinsyoBikou": {
+                    "type": "string"
+                },
+                "syukkaKanryoBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "syukkaYoteiBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "taioJyokyoMei": {
+                    "type": "string"
+                }
+            },
+            "title": "PickingJyuchuListInfo"
+        },
+        "PickingListForm": {
+            "type": "object",
+            "properties": {
+                "koushinNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "picked": {
+                    "type": "boolean"
+                },
+                "shortage": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PickingListForm"
         },
         "SentakushiInfo": {
             "type": "object",
@@ -7923,6 +8801,22 @@
                 }
             },
             "title": "UpdateApiResult«NyukinListForm»"
+        },
+        "UpdateApiResult«PickingListForm»": {
+            "type": "object",
+            "properties": {
+                "errCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "errMsg": {
+                    "type": "string"
+                },
+                "resultData": {
+                    "$ref": "#/definitions/PickingListForm"
+                }
+            },
+            "title": "UpdateApiResult«PickingListForm»"
         },
         "UpdateApiResult«TentouHikitoriListForm»": {
             "type": "object",
