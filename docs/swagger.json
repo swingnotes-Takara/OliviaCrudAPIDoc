@@ -5377,8 +5377,11 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Forbidden"
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             }
@@ -8174,6 +8177,9 @@
                     "type": "string"
                 },
                 "kataban": {
+                    "type": "string"
+                },
+                "katabanMeisho": {
                     "type": "string"
                 },
                 "koushinNichiji": {
