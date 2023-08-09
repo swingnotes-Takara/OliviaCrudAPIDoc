@@ -63,6 +63,14 @@
             "description": "Picking List Controller"
         },
         {
+            "name": "syukka-kakunin-list-controller",
+            "description": "Syukka Kakunin List Controller"
+        },
+        {
+            "name": "syukka-list-controller",
+            "description": "Syukka List Controller"
+        },
+        {
             "name": "tentou-hikitori-list-controller",
             "description": "Tentou Hikitori List Controller"
         },
@@ -1915,7 +1923,7 @@
                 ],
                 "summary": "色名コンボボックス情報取得",
                 "description": "色名コンボボックス情報を取得します。",
-                "operationId": "getColorNameComboUsingGET_5",
+                "operationId": "getColorNameComboUsingGET_7",
                 "produces": [
                     "application/json"
                 ],
@@ -1999,7 +2007,7 @@
                 ],
                 "summary": "色見本種別コンボボックス情報取得",
                 "description": "色見本種別コンボボックス情報を取得します。",
-                "operationId": "getColorSampleComboUsingGET_5",
+                "operationId": "getColorSampleComboUsingGET_7",
                 "produces": [
                     "application/json"
                 ],
@@ -2083,7 +2091,7 @@
                 ],
                 "summary": "容量コンボボックス情報取得",
                 "description": "容量コンボボックス情報を取得します。",
-                "operationId": "getContentsComboUsingGET_5",
+                "operationId": "getContentsComboUsingGET_7",
                 "produces": [
                     "application/json"
                 ],
@@ -2167,7 +2175,7 @@
                 ],
                 "summary": "艶コンボボックス情報取得",
                 "description": "艶コンボボックス情報を取得します。",
-                "operationId": "getGlossComboUsingGET_5",
+                "operationId": "getGlossComboUsingGET_7",
                 "produces": [
                     "application/json"
                 ],
@@ -2251,7 +2259,7 @@
                 ],
                 "summary": "商品種別コンボボックス情報取得",
                 "description": "商品種別コンボボックス情報を取得します。",
-                "operationId": "getItemtypeComboUsingGET_5",
+                "operationId": "getItemtypeComboUsingGET_7",
                 "produces": [
                     "application/json"
                 ],
@@ -2335,7 +2343,7 @@
                 ],
                 "summary": "引取状況更新",
                 "description": "引取状況を更新します。",
-                "operationId": "updateUsingPOST_6",
+                "operationId": "updateUsingPOST_8",
                 "consumes": [
                     "application/json"
                 ],
@@ -4163,7 +4171,7 @@
                     {
                         "name": "picking_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未ピッキング/ピッキング済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -4247,7 +4255,7 @@
                     {
                         "name": "picking_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未ピッキング/ピッキング済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -4331,7 +4339,7 @@
                     {
                         "name": "picking_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未ピッキング/ピッキング済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -4415,7 +4423,7 @@
                     {
                         "name": "picking_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未ピッキング/ピッキング済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -4499,7 +4507,7 @@
                     {
                         "name": "picking_zumi",
                         "in": "query",
-                        "description": "[検索条件]未詰替/詰替済",
+                        "description": "[検索条件]未ピッキング/ピッキング済",
                         "required": true,
                         "type": "boolean"
                     },
@@ -4643,7 +4651,7 @@
                     "picking-list-controller"
                 ],
                 "summary": "ピッキング状況更新",
-                "description": "在庫詰替状況を更新します。",
+                "description": "在庫ピッキング状況を更新します。",
                 "operationId": "updateUsingPOST_5",
                 "consumes": [
                     "application/json"
@@ -4688,6 +4696,1257 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/UpdateApiResult«PickingListForm»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka": {
+            "get": {
+                "tags": [
+                    "syukka-list-controller"
+                ],
+                "summary": "出荷リスト情報取得",
+                "description": "出荷リスト情報を取得します。",
+                "operationId": "getListDataUsingGET_2",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "リクエストするページ番号",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "ページごとのレコード数",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]出荷済",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "syukka_from",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日From",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "syukka_to",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日To",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "chumonsya",
+                        "in": "query",
+                        "description": "[検索条件]注文者名(部分一致)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]出荷",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PagingData«SyukkaInfo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka/comboitems/colorname": {
+            "get": {
+                "tags": [
+                    "syukka-list-controller"
+                ],
+                "summary": "色名コンボボックス情報取得",
+                "description": "色名コンボボックス情報を取得します。",
+                "operationId": "getColorNameComboUsingGET_6",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未出荷/出荷済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka/comboitems/colorsample": {
+            "get": {
+                "tags": [
+                    "syukka-list-controller"
+                ],
+                "summary": "色見本種別コンボボックス情報取得",
+                "description": "色見本種別コンボボックス情報を取得します。",
+                "operationId": "getColorSampleComboUsingGET_6",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未出荷/出荷済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka/comboitems/contents": {
+            "get": {
+                "tags": [
+                    "syukka-list-controller"
+                ],
+                "summary": "容量コンボボックス情報取得",
+                "description": "容量コンボボックス情報を取得します。",
+                "operationId": "getContentsComboUsingGET_6",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未出荷/出荷済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka/comboitems/gloss": {
+            "get": {
+                "tags": [
+                    "syukka-list-controller"
+                ],
+                "summary": "艶コンボボックス情報取得",
+                "description": "艶コンボボックス情報を取得します。",
+                "operationId": "getGlossComboUsingGET_6",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未出荷/出荷済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka/comboitems/itemtype": {
+            "get": {
+                "tags": [
+                    "syukka-list-controller"
+                ],
+                "summary": "商品種別コンボボックス情報取得",
+                "description": "商品種別コンボボックス情報を取得します。",
+                "operationId": "getItemtypeComboUsingGET_6",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未出荷/出荷済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka/{jyuchuNo}/{jyuchuMeisaiNo}": {
+            "post": {
+                "tags": [
+                    "syukka-list-controller"
+                ],
+                "summary": "出荷状況更新",
+                "description": "出荷状況を更新します。",
+                "operationId": "updateUsingPOST_7",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "jyuchuNo",
+                        "in": "path",
+                        "description": "jyuchuNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jyuchuMeisaiNo",
+                        "in": "path",
+                        "description": "jyuchuMeisaiNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "form",
+                        "description": "form",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SyukkaListForm"
+                        }
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateApiResult«SyukkaListForm»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka_kakunin": {
+            "get": {
+                "tags": [
+                    "syukka-kakunin-list-controller"
+                ],
+                "summary": "出荷確認リスト情報取得",
+                "description": "出荷確認リスト情報を取得します。",
+                "operationId": "getListDataUsingGET_1",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "リクエストするページ番号",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "ページごとのレコード数",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "kakunin_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未確認/確認済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "syukka_zumi",
+                        "in": "query",
+                        "description": "[検索条件]出荷済",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "syukka_from",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日From",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "syukka_to",
+                        "in": "query",
+                        "description": "[検索条件]出荷予定日To",
+                        "required": false,
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "name": "chumonsya",
+                        "in": "query",
+                        "description": "[検索条件]注文者名(部分一致)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]出荷確認",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PagingData«SyukkaKakuninInfo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka_kakunin/comboitems/colorname": {
+            "get": {
+                "tags": [
+                    "syukka-kakunin-list-controller"
+                ],
+                "summary": "色名コンボボックス情報取得",
+                "description": "色名コンボボックス情報を取得します。",
+                "operationId": "getColorNameComboUsingGET_5",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "kakunin_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未確認/確認済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka_kakunin/comboitems/colorsample": {
+            "get": {
+                "tags": [
+                    "syukka-kakunin-list-controller"
+                ],
+                "summary": "色見本種別コンボボックス情報取得",
+                "description": "色見本種別コンボボックス情報を取得します。",
+                "operationId": "getColorSampleComboUsingGET_5",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "kakunin_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未確認/確認済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka_kakunin/comboitems/contents": {
+            "get": {
+                "tags": [
+                    "syukka-kakunin-list-controller"
+                ],
+                "summary": "容量コンボボックス情報取得",
+                "description": "容量コンボボックス情報を取得します。",
+                "operationId": "getContentsComboUsingGET_5",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "kakunin_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未確認/確認済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka_kakunin/comboitems/gloss": {
+            "get": {
+                "tags": [
+                    "syukka-kakunin-list-controller"
+                ],
+                "summary": "艶コンボボックス情報取得",
+                "description": "艶コンボボックス情報を取得します。",
+                "operationId": "getGlossComboUsingGET_5",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "kakunin_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未確認/確認済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "shohin_syubetsu",
+                        "in": "query",
+                        "description": "[検索条件]商品種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka_kakunin/comboitems/itemtype": {
+            "get": {
+                "tags": [
+                    "syukka-kakunin-list-controller"
+                ],
+                "summary": "商品種別コンボボックス情報取得",
+                "description": "商品種別コンボボックス情報を取得します。",
+                "operationId": "getItemtypeComboUsingGET_5",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "kakunin_zumi",
+                        "in": "query",
+                        "description": "[検索条件]未確認/確認済",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "tsuya",
+                        "in": "query",
+                        "description": "[検索条件]艶",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "yoryo",
+                        "in": "query",
+                        "description": "[検索条件]容量",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iromihon",
+                        "in": "query",
+                        "description": "[検索条件]色見本種別",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "iro",
+                        "in": "query",
+                        "description": "[検索条件]色名",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MasterInfo"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/v1/list/syukka_kakunin/{jyuchuNo}/{jyuchuMeisaiNo}": {
+            "post": {
+                "tags": [
+                    "syukka-kakunin-list-controller"
+                ],
+                "summary": "出荷確認状況更新",
+                "description": "出荷確認状況を更新します。",
+                "operationId": "updateUsingPOST_6",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "jyuchuNo",
+                        "in": "path",
+                        "description": "jyuchuNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "jyuchuMeisaiNo",
+                        "in": "path",
+                        "description": "jyuchuMeisaiNo",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "form",
+                        "description": "form",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SyukkaKakuninListForm"
+                        }
+                    },
+                    {
+                        "name": "X-User",
+                        "in": "header",
+                        "description": "UserId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "X-Token",
+                        "in": "header",
+                        "description": "Access Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateApiResult«SyukkaKakuninListForm»"
                         }
                     },
                     "201": {
@@ -4846,7 +6105,7 @@
                 ],
                 "summary": "色名コンボボックス情報取得",
                 "description": "色名コンボボックス情報を取得します。",
-                "operationId": "getColorNameComboUsingGET_6",
+                "operationId": "getColorNameComboUsingGET_8",
                 "produces": [
                     "application/json"
                 ],
@@ -4930,7 +6189,7 @@
                 ],
                 "summary": "色見本種別コンボボックス情報取得",
                 "description": "色見本種別コンボボックス情報を取得します。",
-                "operationId": "getColorSampleComboUsingGET_6",
+                "operationId": "getColorSampleComboUsingGET_8",
                 "produces": [
                     "application/json"
                 ],
@@ -5014,7 +6273,7 @@
                 ],
                 "summary": "容量コンボボックス情報取得",
                 "description": "容量コンボボックス情報を取得します。",
-                "operationId": "getContentsComboUsingGET_6",
+                "operationId": "getContentsComboUsingGET_8",
                 "produces": [
                     "application/json"
                 ],
@@ -5098,7 +6357,7 @@
                 ],
                 "summary": "艶コンボボックス情報取得",
                 "description": "艶コンボボックス情報を取得します。",
-                "operationId": "getGlossComboUsingGET_6",
+                "operationId": "getGlossComboUsingGET_8",
                 "produces": [
                     "application/json"
                 ],
@@ -5182,7 +6441,7 @@
                 ],
                 "summary": "商品種別コンボボックス情報取得",
                 "description": "商品種別コンボボックス情報を取得します。",
-                "operationId": "getItemtypeComboUsingGET_6",
+                "operationId": "getItemtypeComboUsingGET_8",
                 "produces": [
                     "application/json"
                 ],
@@ -5266,7 +6525,7 @@
                 ],
                 "summary": "在庫詰替状況更新",
                 "description": "在庫詰替状況を更新します。",
-                "operationId": "updateUsingPOST_7",
+                "operationId": "updateUsingPOST_9",
                 "consumes": [
                     "application/json"
                 ],
@@ -5377,11 +6636,8 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "404": {
-                        "description": "Not Found"
+                    "403": {
+                        "description": "Forbidden"
                     }
                 }
             }
@@ -8089,6 +9345,54 @@
             },
             "title": "PagingData«PickingJyuchuListInfo»"
         },
+        "PagingData«SyukkaInfo»": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SyukkaInfo"
+                    }
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PagingData«SyukkaInfo»"
+        },
+        "PagingData«SyukkaKakuninInfo»": {
+            "type": "object",
+            "properties": {
+                "currentPage": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SyukkaKakuninInfo"
+                    }
+                },
+                "totalElements": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "totalPages": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "title": "PagingData«SyukkaKakuninInfo»"
+        },
         "PagingData«TentouHikitoriInfo»": {
             "type": "object",
             "properties": {
@@ -8380,6 +9684,276 @@
                 }
             },
             "title": "StatusMasterInfo"
+        },
+        "SyukkaInfo": {
+            "type": "object",
+            "properties": {
+                "bikou": {
+                    "type": "string"
+                },
+                "chumonSyaKaisyamei": {
+                    "type": "string"
+                },
+                "chumonSyaMeisho": {
+                    "type": "string"
+                },
+                "iro": {
+                    "type": "string"
+                },
+                "iroMei": {
+                    "type": "string"
+                },
+                "iromihonSyubetsu": {
+                    "type": "string"
+                },
+                "iromihonSyubetsuMei": {
+                    "type": "string"
+                },
+                "jyuchuMeisaiNo": {
+                    "type": "string"
+                },
+                "jyuchuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "jyuchuNo": {
+                    "type": "string"
+                },
+                "jyuchuTantousyaMei": {
+                    "type": "string"
+                },
+                "kakuninNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "kakuninTantosyaID": {
+                    "type": "string"
+                },
+                "kakuninTantosyaMei": {
+                    "type": "string"
+                },
+                "koguchiSu": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "kokyakuID": {
+                    "type": "string"
+                },
+                "konpoNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "konpoTantosyaID": {
+                    "type": "string"
+                },
+                "konpoTantosyaMei": {
+                    "type": "string"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "nouhinsyoBikou": {
+                    "type": "string"
+                },
+                "shohinSyubetsu": {
+                    "type": "string"
+                },
+                "shohinSyubetsuMei": {
+                    "type": "string"
+                },
+                "statusMei": {
+                    "type": "string"
+                },
+                "suryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "syukkaHouhouMei": {
+                    "type": "string"
+                },
+                "syukkaKanryoBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "syukkaYoteiBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "tanka": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tourokuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "tourokuSyaID": {
+                    "type": "string"
+                },
+                "tsuya": {
+                    "type": "string"
+                },
+                "tsuyaMei": {
+                    "type": "string"
+                },
+                "youryo": {
+                    "type": "string"
+                },
+                "youryoMei": {
+                    "type": "string"
+                }
+            },
+            "title": "SyukkaInfo"
+        },
+        "SyukkaKakuninInfo": {
+            "type": "object",
+            "properties": {
+                "bikou": {
+                    "type": "string"
+                },
+                "chumonSyaKaisyamei": {
+                    "type": "string"
+                },
+                "chumonSyaMeisho": {
+                    "type": "string"
+                },
+                "iro": {
+                    "type": "string"
+                },
+                "iroMei": {
+                    "type": "string"
+                },
+                "iromihonSyubetsu": {
+                    "type": "string"
+                },
+                "iromihonSyubetsuMei": {
+                    "type": "string"
+                },
+                "jyuchuMeisaiNo": {
+                    "type": "string"
+                },
+                "jyuchuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "jyuchuNo": {
+                    "type": "string"
+                },
+                "jyuchuTantousyaMei": {
+                    "type": "string"
+                },
+                "kakuninNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "kakuninTantosyaID": {
+                    "type": "string"
+                },
+                "kakuninTantosyaMei": {
+                    "type": "string"
+                },
+                "koguchiSu": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "kokyakuID": {
+                    "type": "string"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "nouhinsyoBikou": {
+                    "type": "string"
+                },
+                "shohinSyubetsu": {
+                    "type": "string"
+                },
+                "shohinSyubetsuMei": {
+                    "type": "string"
+                },
+                "statusMei": {
+                    "type": "string"
+                },
+                "suryo": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "syukkaHouhouMei": {
+                    "type": "string"
+                },
+                "syukkaKanryoBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "syukkaYoteiBi": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "tanka": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tourokuNichiji": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "tourokuSyaID": {
+                    "type": "string"
+                },
+                "tsuya": {
+                    "type": "string"
+                },
+                "tsuyaMei": {
+                    "type": "string"
+                },
+                "youryo": {
+                    "type": "string"
+                },
+                "youryoMei": {
+                    "type": "string"
+                }
+            },
+            "title": "SyukkaKakuninInfo"
+        },
+        "SyukkaKakuninListForm": {
+            "type": "object",
+            "properties": {
+                "confirmed": {
+                    "type": "boolean"
+                },
+                "koushinNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                }
+            },
+            "title": "SyukkaKakuninListForm"
+        },
+        "SyukkaListForm": {
+            "type": "object",
+            "properties": {
+                "koushinNichiji": {
+                    "type": "string",
+                    "example": "yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "koushinSyaID": {
+                    "type": "string"
+                },
+                "shipped": {
+                    "type": "boolean"
+                }
+            },
+            "title": "SyukkaListForm"
         },
         "TentouHikitoriInfo": {
             "type": "object",
@@ -8823,6 +10397,38 @@
                 }
             },
             "title": "UpdateApiResult«PickingListForm»"
+        },
+        "UpdateApiResult«SyukkaKakuninListForm»": {
+            "type": "object",
+            "properties": {
+                "errCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "errMsg": {
+                    "type": "string"
+                },
+                "resultData": {
+                    "$ref": "#/definitions/SyukkaKakuninListForm"
+                }
+            },
+            "title": "UpdateApiResult«SyukkaKakuninListForm»"
+        },
+        "UpdateApiResult«SyukkaListForm»": {
+            "type": "object",
+            "properties": {
+                "errCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "errMsg": {
+                    "type": "string"
+                },
+                "resultData": {
+                    "$ref": "#/definitions/SyukkaListForm"
+                }
+            },
+            "title": "UpdateApiResult«SyukkaListForm»"
         },
         "UpdateApiResult«TentouHikitoriListForm»": {
             "type": "object",
